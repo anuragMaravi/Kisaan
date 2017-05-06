@@ -29,6 +29,8 @@ public class CardsFragment extends Fragment {
     private View rootView;
     private ProgressBar progressBar;
 
+
+
     public CardsFragment() {
         // Required empty public constructor
     }
