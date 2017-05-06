@@ -7,5 +7,29 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MovieDetails" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="actionBarStyle">@style/action_bar_theme</item>
+    </style>
+    <style name="Main" parent="AppTheme.NoActionBar">
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <item name="actionBarStyle">@style/action_bar_theme</item>
+    </style>
 
+    <style name="action_bar_theme">
+        <item name="android:background">#fff</item>
+    </style>
+
+
+    <style name="YourTextAppareance" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily"></item>
+    </style>
 </resources>
