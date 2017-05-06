@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment fragment,fragme;
     private FragmentManager fragmentManager;
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
