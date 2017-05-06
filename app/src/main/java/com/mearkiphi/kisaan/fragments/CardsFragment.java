@@ -1,6 +1,5 @@
 package com.mearkiphi.kisaan.fragments;
 
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,7 +18,6 @@ import com.mearkiphi.kisaan.hasura.Hasura;
 import com.mearkiphi.kisaan.models.SelectCatQuery;
 import com.mearkiphi.kisaan.models.TodoRecord;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +32,6 @@ import retrofit2.Response;
 public class CardsFragment extends Fragment {
     private RecyclerView recyclerViewMoviesInTheatres;
     private CatAdapter adapter;
-    private List<Movie> movieListInTheatres;
     private View rootView;
     private ProgressBar progressBar;
 
@@ -67,7 +64,6 @@ public class CardsFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     recyclerViewMoviesInTheatres = (RecyclerView) rootView.findViewById(R.id.recyclerViewMoviesInTheatres);
-                    movieListInTheatres = new ArrayList<>();
                     RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
                     recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
                     recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());

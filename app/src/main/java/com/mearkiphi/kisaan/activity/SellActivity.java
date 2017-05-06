@@ -1,35 +1,69 @@
 package com.mearkiphi.kisaan.activity;
 
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.adapter.SellAdapter;
+import com.mearkiphi.kisaan.adapter.CatAdapter;
+import com.mearkiphi.kisaan.hasura.Hasura;
+import com.mearkiphi.kisaan.models.SelectCatQuery;
+import com.mearkiphi.kisaan.models.TodoRecord;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SellActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private List<Movie> gymArrayList;
+    private RecyclerView recyclerViewMoviesInTheatres;
+    private CatAdapter adapter;
+//    private ProgressBar progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+//        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        fetchTodosFromDB();
+    }
 
-        recyclerView = (RecyclerView) findViewById(R.id.fragment_demo_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        gymArrayList = new ArrayList<>();
+    private void fetchTodosFromDB() {
+        Hasura.db.getCat(new SelectCatQuery(1)).enqueue(new Callback<List<TodoRecord>>() {
 
-        layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        SellAdapter adapter = new SellAdapter(getApplicationContext(), gymArrayList);
-        recyclerView.setAdapter(adapter);
+            @Override
+            public void onResponse(Call<List<TodoRecord>> call, Response<List<TodoRecord>> response) {
+                Log.i("Trying", "onResponse: " + response.body());
+                if (response.isSuccessful()) {
+
+                    recyclerViewMoviesInTheatres = (RecyclerView) findViewById(R.id.fragment_demo_recycler_view);
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+                    recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
+                    recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new CatAdapter(getApplicationContext());
+                    adapter.setData(response.body());
+                    recyclerViewMoviesInTheatres.setAdapter(adapter);
+                    recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
+//                    progressBar.setVisibility(View.GONE);
+
+                } else {
+//                    handleError(response.errorBody());
+                    Toast.makeText(getApplicationContext(), "Some Error Occurred", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TodoRecord>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Some Error Occurred", Toast.LENGTH_SHORT).show();            }
+        });
     }
 }

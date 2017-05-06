@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.activity.BuyActivity;
+import com.mearkiphi.kisaan.activity.ListActivity;
 import com.mearkiphi.kisaan.models.TodoRecord;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BuyActivity.class);
+                Intent intent = new Intent(context, ListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("gymId", "Hello");
                 context.startActivity(intent);

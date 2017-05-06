@@ -31,6 +31,7 @@
         <activity android:name=".activity.ListActivity" />
         <activity android:name=".activity.ToDoActivity" />
         <activity android:name=".activity.BuyActivity"/>
+        <activity android:name=".activity.SellActivity"/>
     </application>
 
 </manifest>

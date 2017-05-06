@@ -2,7 +2,6 @@ package com.mearkiphi.kisaan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Movie;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mearkiphi.kisaan.R;
 import com.mearkiphi.kisaan.activity.SellActivity;
+import com.mearkiphi.kisaan.models.TodoRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,50 +23,67 @@ import java.util.List;
 
 public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder>  {
 
-    private Context mContext;
-    private List<Movie> movieList = null;
-    private String[] itemNames = {"Vegetables", "Fruits", "Spices", "Spices", "Spices", "Spices", "Spices", "Spices"};
-
-
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_categories, parent, false);
-        return new SellAdapter.MyViewHolder(itemView);
+    List<TodoRecord> data = new ArrayList<>();
+    Context context;
+    public SellAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.textView.setText(itemNames[position]);
-//        Glide.with(mContext).load(movie.getPosterPath()).into(holder.thumbnail);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categories,parent,false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        final TodoRecord todoRecord = data.get(position);
+        Glide.with(context).load(todoRecord.getImage()).into(holder.imageView);
+        holder.textView.setText(todoRecord.getCategory());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, SellActivity.class);
-                intent.putExtra("movie_id", "Hello");
+                Intent intent = new Intent(context, SellActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                intent.putExtra("gymId", "Hello");
+                context.startActivity(intent);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return itemNames.length;
+        return data.size();
     }
 
-    public SellAdapter(Context mContext, List<Movie> movieList) {
-        this.mContext = mContext;
-        this.movieList = movieList;
+    public void setData(List<TodoRecord> recordList) {
+        this.data = recordList;
+        notifyDataSetChanged();
+    }
+
+    public void deleteData(int position, TodoRecord record) {
+        this.data.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void updateData(int position, TodoRecord record) {
+        this.data.set(position,record);
+        notifyDataSetChanged();
+    }
+
+    public void addData(TodoRecord record) {
+        this.data.add(record);
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public ImageView imageView;
-        public MyViewHolder(View view) {
-            super(view);
-            textView = (TextView) view.findViewById(R.id.textView);
-            imageView = (ImageView) view.findViewById(R.id.imageView);
+        TextView textView;
+        ImageView imageView;
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            textView = (TextView) itemView.findViewById(R.id.textView);
+            imageView = (ImageView) itemView.findViewById(R.id.imageView);
         }
     }
 }
