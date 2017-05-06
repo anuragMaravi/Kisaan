@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:layout_margin="16dp">
 
-                <com.mearkiphi.agro.others.CustomTextView
+                <com.mearkiphi.kisaan.others.CustomTextView
                     android:id="@+id/textViewGymName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
