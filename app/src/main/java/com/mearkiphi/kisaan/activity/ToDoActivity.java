@@ -82,12 +82,11 @@ public class ToDoActivity extends BaseActivity {
 
     private void fetchTodosFromDB() {
         showProgressIndicator();
-        Log.i(TAG, "selectse: " + new SelectTodoQuery(Hasura.getUserId()));
         Hasura.db.getTodos(new SelectTodoQuery(Hasura.getUserId())).enqueue(new Callback<List<TodoRecord>>() {
 
             @Override
             public void onResponse(Call<List<TodoRecord>> call, Response<List<TodoRecord>> response) {
-                Log.i(TAG, "onResponse: " + response.body());
+                Log.i(TAG, "onResponse: " + response.body().get(0).getTitle());
                 hideProgressIndicator();
                 if (response.isSuccessful()) {
                     adapter.setData(response.body());

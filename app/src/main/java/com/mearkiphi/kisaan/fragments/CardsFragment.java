@@ -6,16 +6,25 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.adapter.BuyAdapter;
+import com.mearkiphi.kisaan.adapter.CatAdapter;
+import com.mearkiphi.kisaan.hasura.Hasura;
+import com.mearkiphi.kisaan.models.SelectCatQuery;
+import com.mearkiphi.kisaan.models.TodoRecord;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -24,7 +33,7 @@ import java.util.List;
 
 public class CardsFragment extends Fragment {
     private RecyclerView recyclerViewMoviesInTheatres;
-    private BuyAdapter adapter;
+    private CatAdapter adapter;
     private List<Movie> movieListInTheatres;
     private View rootView;
     private ProgressBar progressBar;
@@ -45,55 +54,39 @@ public class CardsFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_cards, container, false);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-
-
-        /**
-         * In Theatres Movies
-         */
-        recyclerViewMoviesInTheatres = (RecyclerView) rootView.findViewById(R.id.recyclerViewMoviesInTheatres);
-        movieListInTheatres = new ArrayList<>();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
-        recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());
-        adapter = new BuyAdapter(getActivity(), movieListInTheatres);
-                            recyclerViewMoviesInTheatres.setAdapter(adapter);
-                            recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.GONE);
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, MOVIE_NOW_PLAYING_REQUEST,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            Log.i("Volley", "onResponse(MovieInTheatres): " + response);
-//                            JSONObject parentObject = new JSONObject(response);
-//                            JSONArray parentArray = parentObject.getJSONArray("results");
-//                            for(int i=0;i<parentArray.length();i++){
-//                                JSONObject finalObject = parentArray.getJSONObject(i);
-//                                Movie movieModel = new Movie();
-//                                movieModel.setId(finalObject.getString("id"));
-//                                movieModel.setPosterPath(Contract.API_IMAGE_URL + finalObject.getString("poster_path"));
-//
-//                                movieListInTheatres.add(movieModel);
-//                            }
-//                            adapter = new BuyAdapter(getActivity(), movieListInTheatres);
-//                            recyclerViewMoviesInTheatres.setAdapter(adapter);
-//                            recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
-//                            progressBar.setVisibility(View.GONE);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getActivity(), "Please check your internet connection.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        // Add the request to the RequestQueue.
-//        VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
+        fetchTodosFromDB();
         return rootView;
     }
 
+    private void fetchTodosFromDB() {
+        Hasura.db.getCat(new SelectCatQuery(1)).enqueue(new Callback<List<TodoRecord>>() {
+
+            @Override
+            public void onResponse(Call<List<TodoRecord>> call, Response<List<TodoRecord>> response) {
+                Log.i("Trying", "onResponse: " + response.body());
+                if (response.isSuccessful()) {
+
+                    recyclerViewMoviesInTheatres = (RecyclerView) rootView.findViewById(R.id.recyclerViewMoviesInTheatres);
+                    movieListInTheatres = new ArrayList<>();
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+                    recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
+                    recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new CatAdapter(getActivity());
+                    adapter.setData(response.body());
+                    recyclerViewMoviesInTheatres.setAdapter(adapter);
+                    recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+
+                } else {
+//                    handleError(response.errorBody());
+                    Toast.makeText(getActivity(), "Some Error Occurred", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TodoRecord>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Some Error Occurred", Toast.LENGTH_SHORT).show();            }
+        });
+    }
 
 }

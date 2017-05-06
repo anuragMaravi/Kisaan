@@ -23,6 +23,17 @@ public class TodoRecord {
     @SerializedName("category")
     String category;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @SerializedName("image")
+    String image;
+
 
 
     public TodoRecord(String title, Integer userId, Boolean completed) {
