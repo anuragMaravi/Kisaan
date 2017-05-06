@@ -45,7 +45,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="32sp" />
 
-        <com.mearkiphi.agro.others.CustomTextView
+        <com.mearkiphi.kisaan.others.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
