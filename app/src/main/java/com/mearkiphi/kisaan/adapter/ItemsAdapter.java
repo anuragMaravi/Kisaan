@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.activity.ItemDetailActivity;
+import com.mearkiphi.kisaan.activity.BuyActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(context, ItemDetailActivity.class);
+		Intent intent = new Intent(context, BuyActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra("gymId", "Hello");
 		context.startActivity(intent);

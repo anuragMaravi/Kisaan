@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.adapter.BuyAdapter;
+import com.mearkiphi.kisaan.adapter.SellAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +22,16 @@ import java.util.List;
  * Created by anuragmaravi on 05/04/17.
  */
 
-public class CardsFragment extends Fragment {
+public class SellFragment extends Fragment {
     private RecyclerView recyclerViewMoviesInTheatres;
-    private BuyAdapter adapter;
+    private SellAdapter adapter;
     private List<Movie> movieListInTheatres;
     private View rootView;
     private ProgressBar progressBar;
 
 
 
-    public CardsFragment() {
+    public SellFragment() {
         // Required empty public constructor
     }
 
@@ -46,16 +46,12 @@ public class CardsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_cards, container, false);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
 
-
-        /**
-         * In Theatres Movies
-         */
         recyclerViewMoviesInTheatres = (RecyclerView) rootView.findViewById(R.id.recyclerViewMoviesInTheatres);
         movieListInTheatres = new ArrayList<>();
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
         recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());
-        adapter = new BuyAdapter(getActivity(), movieListInTheatres);
+        adapter = new SellAdapter(getActivity(), movieListInTheatres);
                             recyclerViewMoviesInTheatres.setAdapter(adapter);
                             recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);

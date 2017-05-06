@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.activity.ListActivity;
+import com.mearkiphi.kisaan.activity.SellActivity;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by anuragmaravi on 14/03/17.
  */
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder>  {
+public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder>  {
 
     private Context mContext;
     private List<Movie> movieList = null;
@@ -30,7 +30,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_categories, parent, false);
-        return new MoviesAdapter.MyViewHolder(itemView);
+        return new SellAdapter.MyViewHolder(itemView);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ListActivity.class);
+                Intent intent = new Intent(mContext, SellActivity.class);
                 intent.putExtra("movie_id", "Hello");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
@@ -53,7 +53,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         return itemNames.length;
     }
 
-    public MoviesAdapter(Context mContext, List<Movie> movieList) {
+    public SellAdapter(Context mContext, List<Movie> movieList) {
         this.mContext = mContext;
         this.movieList = movieList;
     }

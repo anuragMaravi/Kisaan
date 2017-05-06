@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import com.mearkiphi.kisaan.R;
 
 
-public class ItemDetailActivity extends AppCompatActivity {
+public class SellFormActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_detail);
+        setContentView(R.layout.activity_sell_form);
     }
 }

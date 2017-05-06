@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.mearkiphi.kisaan.R;
 import com.mearkiphi.kisaan.fragments.CardsFragment;
+import com.mearkiphi.kisaan.fragments.SellFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_dashboard:
                     toolbar_title =(TextView) findViewById(R.id.toolbar_title);
-                    toolbar_title.setText("CATEGORIES");
+                    toolbar_title.setText("BUY");
                     fragment = new CardsFragment();
                     return true;
                 case R.id.navigation_notifications:
                     toolbar_title =(TextView) findViewById(R.id.toolbar_title);
-                    toolbar_title.setText("CART");
-                    fragment = new CardsFragment();
+                    toolbar_title.setText("SELL");
+                    fragment = new SellFragment();
                     return true;
             }
             return false;
