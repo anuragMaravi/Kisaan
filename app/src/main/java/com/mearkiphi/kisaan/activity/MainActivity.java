@@ -1,5 +1,7 @@
 package com.mearkiphi.kisaan.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,8 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView toolbar_title;
 
     BottomNavigationView navigation;
-
-
+    public static void startActivity(Activity startingActivity) {
+        startingActivity.startActivity(new Intent(startingActivity,MainActivity.class));
+        startingActivity.finish();
+    }
     private static final String TAG = MainActivity.class.getSimpleName();
     private Fragment fragment,fragme;
     private FragmentManager fragmentManager;
