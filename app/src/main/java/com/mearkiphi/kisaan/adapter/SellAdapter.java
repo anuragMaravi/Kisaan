@@ -45,7 +45,7 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.MyViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(context, SellActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("gymId", "Hello");
+                intent.putExtra("key", todoRecord.getCategory());
                 context.startActivity(intent);
             }
         });

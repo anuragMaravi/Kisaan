@@ -38,7 +38,7 @@ public class SellActivity extends AppCompatActivity {
     }
 
     private void fetchTodosFromDB() {
-        Hasura.db.getSubCat(new SelectSubCategoryQuery("Fruits")).enqueue(new Callback<List<TodoRecord>>() {
+        Hasura.db.getSubCat(new SelectSubCategoryQuery(getIntent().getStringExtra("key"))).enqueue(new Callback<List<TodoRecord>>() {
 
             @Override
             public void onResponse(Call<List<TodoRecord>> call, Response<List<TodoRecord>> response) {
