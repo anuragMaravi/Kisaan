@@ -4,6 +4,7 @@ package com.mearkiphi.kisaan.hasura;
 import com.mearkiphi.kisaan.models.DeleteTodoQuery;
 import com.mearkiphi.kisaan.models.InsertTodoQuery;
 import com.mearkiphi.kisaan.models.SelectCatQuery;
+import com.mearkiphi.kisaan.models.SelectSubCategoryQuery;
 import com.mearkiphi.kisaan.models.SelectTodoQuery;
 import com.mearkiphi.kisaan.models.TodoRecord;
 import com.mearkiphi.kisaan.models.TodoReturningResponse;
@@ -27,6 +28,10 @@ public interface HasuraDBInterface {
     //To get the categories
     @POST(Endpoint.QUERY)
     Call<List<TodoRecord>> getCat(@Body SelectCatQuery query);
+
+    //To get the subcategory
+    @POST(Endpoint.QUERY)
+    Call<List<TodoRecord>> getSubCat(@Body SelectSubCategoryQuery query);
 
     @POST(Endpoint.QUERY)
     Call<TodoReturningResponse> addATodo(@Body InsertTodoQuery query);

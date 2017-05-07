@@ -23,6 +23,12 @@ public class TodoRecord {
     @SerializedName("category")
     String category;
 
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("item_name")
+    String itemName;
+
     public String getImage() {
         return image;
     }
@@ -80,5 +86,21 @@ public class TodoRecord {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

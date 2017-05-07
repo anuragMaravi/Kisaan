@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mearkiphi.kisaan">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +34,8 @@
         <activity android:name=".activity.ToDoActivity" />
         <activity android:name=".activity.BuyActivity"/>
         <activity android:name=".activity.SellActivity"/>
+        <activity android:name=".activity.SellFormActivity"/>
+
     </application>
 
 </manifest>
