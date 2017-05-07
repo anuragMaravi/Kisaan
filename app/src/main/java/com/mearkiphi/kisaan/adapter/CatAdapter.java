@@ -45,7 +45,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.CatViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, ListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("gymId", "Hello");
+                intent.putExtra("key", todoRecord.getCategory());
                 context.startActivity(intent);
             }
         });

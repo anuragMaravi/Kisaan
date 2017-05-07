@@ -29,6 +29,15 @@ public class TodoRecord {
     @SerializedName("item_name")
     String itemName;
 
+    @SerializedName("location")
+    String location;
+
+    @SerializedName("rate")
+    String rate;
+
+    @SerializedName("sub_category")
+    String subCategory;
+
     public String getImage() {
         return image;
     }
@@ -102,5 +111,29 @@ public class TodoRecord {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 }

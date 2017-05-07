@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_dashboard:
                     toolbar_title =(TextView) findViewById(R.id.toolbar_title);
-                    toolbar_title.setText("MOVIES");
+                    toolbar_title.setText("BUY");
                     fragment = new CardsFragment();
                     break;
                 case R.id.navigation_notifications:
