@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.activity.SellFormActivity;
+import com.mearkiphi.kisaan.activity.BuyActivity;
 import com.mearkiphi.kisaan.models.TodoRecord;
 
 import java.util.ArrayList;
@@ -21,17 +21,17 @@ import java.util.List;
  * Created by anuragmaravi on 14/03/17.
  */
 
-public class SubCatAdapter extends RecyclerView.Adapter<SubCatAdapter.MyViewHolder>  {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder>  {
 
     List<TodoRecord> data = new ArrayList<>();
     Context context;
-    public SubCatAdapter(Context context) {
+    public ListAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categories,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gym_list,parent,false);
         return new MyViewHolder(view);
     }
 
@@ -39,15 +39,16 @@ public class SubCatAdapter extends RecyclerView.Adapter<SubCatAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final TodoRecord todoRecord = data.get(position);
         Glide.with(context).load(todoRecord.getImage()).into(holder.imageView);
-        holder.textView.setText(todoRecord.getItemName());
+        holder.textViewGymName.setText(todoRecord.getSubCategory());
+        holder.textViewStarting.setText(String.valueOf(todoRecord.getRate()));
+        holder.textViewGymAddress.setText(todoRecord.getCategory());
+        holder.textViewGymCategory.setText(todoRecord.getLocation());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SellFormActivity.class);
+                Intent intent = new Intent(context, BuyActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("item_name", todoRecord.getItemName());
-                intent.putExtra("type", todoRecord.getType());
-                intent.putExtra("image", todoRecord.getImage());
+                intent.putExtra("key", todoRecord.getCategory());
                 context.startActivity(intent);
             }
         });
@@ -80,11 +81,14 @@ public class SubCatAdapter extends RecyclerView.Adapter<SubCatAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        ImageView imageView;
+        public TextView textViewGymName, textViewGymAddress, textViewGymCategory, textViewStarting;
+        public ImageView imageView;
         public MyViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.textView);
+            textViewGymName = (TextView) itemView.findViewById(R.id.textViewGymName);
+            textViewGymAddress = (TextView) itemView.findViewById(R.id.textViewGymAddress);
+            textViewGymCategory = (TextView) itemView.findViewById(R.id.textViewGymCategory);
+            textViewStarting = (TextView) itemView.findViewById(R.id.textViewStarting);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
         }
     }

@@ -17,22 +17,22 @@ public class InsertTodoQuery {
     @SerializedName("args")
     Args args;
 
-    public InsertTodoQuery(String title, Integer userId) {
+    public InsertTodoQuery(String location, Integer user_id, Integer rate, String category, String subCategory, String image) {
         args = new Args();
         args.objects = new ArrayList<>();
-        TodoRecord record = new TodoRecord(title,userId, false);
+        TodoRecord record = new TodoRecord(location, user_id, rate, category, subCategory, image);
         args.objects.add(record);
     }
 
     class Args {
 
         @SerializedName("table")
-        String table = "todo";
+        String table = "sell_page";
 
-        @SerializedName("returning")
-        String[] returning = {
-                "id","title","completed"
-        };
+//        @SerializedName("returning")
+//        String[] returning = {
+//                "id","location","category"
+//        };
 
         @SerializedName("objects")
         List<TodoRecord> objects;

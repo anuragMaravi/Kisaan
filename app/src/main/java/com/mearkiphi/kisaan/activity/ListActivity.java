@@ -2,12 +2,14 @@ package com.mearkiphi.kisaan.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mearkiphi.kisaan.R;
-import com.mearkiphi.kisaan.adapter.SubCatAdapter;
+import com.mearkiphi.kisaan.adapter.ListAdapter;
 import com.mearkiphi.kisaan.hasura.Hasura;
 import com.mearkiphi.kisaan.models.SelectItemDetailsQuery;
 import com.mearkiphi.kisaan.models.TodoRecord;
@@ -20,7 +22,7 @@ import retrofit2.Response;
 
 public class ListActivity extends AppCompatActivity {
     private RecyclerView recyclerViewMoviesInTheatres;
-    private SubCatAdapter adapter;
+    private ListAdapter adapter;
 //    private ProgressBar progressBar;
 
 
@@ -38,23 +40,22 @@ public class ListActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<TodoRecord>> call, Response<List<TodoRecord>> response) {
-                Log.i("ItemDetails", "onResponse: " + response.body().get(0).getCategory());
-//                if (response.isSuccessful()) {
-//
-//                    recyclerViewMoviesInTheatres = (RecyclerView) findViewById(R.id.fragment_demo_recycler_view);
-//                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-//                    recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
-//                    recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());
-//                    adapter = new SubCatAdapter(getApplicationContext());
-//                    adapter.setData(response.body());
-//                    recyclerViewMoviesInTheatres.setAdapter(adapter);
-//                    recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
-////                    progressBar.setVisibility(View.GONE);
-//
-//                } else {
-////                    handleError(response.errorBody());
-//                    Toast.makeText(getApplicationContext(), "Some Error Occurred", Toast.LENGTH_SHORT).show();
-//                }
+                if (response.isSuccessful()) {
+
+                    recyclerViewMoviesInTheatres = (RecyclerView) findViewById(R.id.fragment_demo_recycler_view);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerViewMoviesInTheatres.setLayoutManager(mLayoutManager);
+                    recyclerViewMoviesInTheatres.setItemAnimator(new DefaultItemAnimator());
+                    adapter = new ListAdapter(getApplicationContext());
+                    adapter.setData(response.body());
+                    recyclerViewMoviesInTheatres.setAdapter(adapter);
+                    recyclerViewMoviesInTheatres.setVisibility(View.VISIBLE);
+//                    progressBar.setVisibility(View.GONE);
+
+                } else {
+//                    handleError(response.errorBody());
+                    Toast.makeText(getApplicationContext(), "Some Error Occurred", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

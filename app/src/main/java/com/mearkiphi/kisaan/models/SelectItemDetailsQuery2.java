@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by jaison on 23/01/17.
  */
 
-public class SelectItemDetailsQuery {
+public class SelectItemDetailsQuery2 {
 
     @SerializedName("type")
     String type = "select";
@@ -14,10 +14,10 @@ public class SelectItemDetailsQuery {
     @SerializedName("args")
     Args args;
 
-    public SelectItemDetailsQuery(String category) {
+    public SelectItemDetailsQuery2(String category) {
         args = new Args();
-        args.where = new Where();
-        args.where.category = category;
+//        args.where = new Where();
+//        args.where.category = category;
     }
 
     class Args {
@@ -35,7 +35,7 @@ public class SelectItemDetailsQuery {
     }
 
     class Where {
-        @SerializedName("category")
+        @SerializedName("type")
         String category;
     }
 

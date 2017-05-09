@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -42,7 +41,6 @@ public class SellActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<List<TodoRecord>> call, Response<List<TodoRecord>> response) {
-                Log.i("SubCategory", "onResponse: " + response.body().get(0).getItemName());
                 if (response.isSuccessful()) {
 
                     recyclerViewMoviesInTheatres = (RecyclerView) findViewById(R.id.fragment_demo_recycler_view);

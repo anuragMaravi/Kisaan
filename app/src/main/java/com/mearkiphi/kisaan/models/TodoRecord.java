@@ -33,7 +33,7 @@ public class TodoRecord {
     String location;
 
     @SerializedName("rate")
-    String rate;
+    Integer rate;
 
     @SerializedName("sub_category")
     String subCategory;
@@ -51,10 +51,13 @@ public class TodoRecord {
 
 
 
-    public TodoRecord(String title, Integer userId, Boolean completed) {
-        this.title = title;
+    public TodoRecord(String location, Integer userId, Integer rate, String category, String subCategory, String image) {
+        this.location = location;
         this.userId = userId;
-        this.completed = completed;
+        this.rate = rate;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.image = image;
     }
 
     public Integer getId() {
@@ -121,11 +124,11 @@ public class TodoRecord {
         this.location = location;
     }
 
-    public String getRate() {
+    public Integer getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(Integer rate) {
         this.rate = rate;
     }
 
