@@ -49,6 +49,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
                 Intent intent = new Intent(context, BuyActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("key", todoRecord.getCategory());
+                intent.putExtra("sub_category", todoRecord.getSubCategory());
                 context.startActivity(intent);
             }
         });

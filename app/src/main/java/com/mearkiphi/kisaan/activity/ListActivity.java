@@ -30,6 +30,8 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setTitle(getIntent().getStringExtra("key"));
 //        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         fetchTodosFromDB();
     }

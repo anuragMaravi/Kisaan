@@ -29,6 +29,8 @@ public class SellFormActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_form);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setTitle("Sell " + getIntent().getStringExtra("item_name"));
 //        Spinner spinner = (Spinner) findViewById(R.id.spinner);
 //        spinner.setOnItemSelectedListener(this);
 //        List<String> categories = new ArrayList<String>();
