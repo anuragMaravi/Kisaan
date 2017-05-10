@@ -48,6 +48,7 @@ public class AuthenticationActivity extends BaseActivity implements View.OnClick
 
         if (Hasura.getUserSessionId() != null) {
             MainActivity.startActivity(AuthenticationActivity.this);
+
         }
 
     }
