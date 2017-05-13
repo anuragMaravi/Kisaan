@@ -14,10 +14,10 @@ public class SelectItemDetailsQuery2 {
     @SerializedName("args")
     Args args;
 
-    public SelectItemDetailsQuery2(String category) {
+    public SelectItemDetailsQuery2(int id) {
         args = new Args();
-//        args.where = new Where();
-//        args.where.category = category;
+        args.where = new Where();
+        args.where.id = id;
     }
 
     class Args {
@@ -35,8 +35,8 @@ public class SelectItemDetailsQuery2 {
     }
 
     class Where {
-        @SerializedName("type")
-        String category;
+        @SerializedName("id")
+        int id;
     }
 
 }

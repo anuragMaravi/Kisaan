@@ -46,7 +46,7 @@ public class BuyActivity extends AppCompatActivity {
     }
 
     private void fetchTodosFromDB() {
-        Hasura.db.getItemDetails2(new SelectItemDetailsQuery2(getIntent().getStringExtra("key"))).enqueue(new Callback<List<TodoRecord>>() {
+        Hasura.db.getItemDetails2(new SelectItemDetailsQuery2(getIntent().getIntExtra("id", 0))).enqueue(new Callback<List<TodoRecord>>() {
 
             @Override
             public void onResponse(Call<List<TodoRecord>> call, final Response<List<TodoRecord>> response) {
