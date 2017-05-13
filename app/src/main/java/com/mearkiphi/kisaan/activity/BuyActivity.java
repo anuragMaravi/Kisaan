@@ -20,6 +20,7 @@ import com.mearkiphi.kisaan.R;
 import com.mearkiphi.kisaan.hasura.Hasura;
 import com.mearkiphi.kisaan.models.SelectItemDetailsQuery2;
 import com.mearkiphi.kisaan.models.TodoRecord;
+import com.mearkiphi.kisaan.others.GPSTracker;
 
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class BuyActivity extends AppCompatActivity {
     private ImageView imageViewItem;
     private TextView textViewRate, textViewSubType, textViewLocation;
     private FloatingActionButton fab, fab2;
+    GPSTracker gps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +88,11 @@ public class BuyActivity extends AppCompatActivity {
                     fab2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            gps = new GPSTracker(BuyActivity.this);
+                            double latitude = gps.getLatitude();
+                            double longitude = gps.getLongitude();
                             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                    Uri.parse("http://maps.google.com/maps?saddr=12.969395, 80.243985&daddr=" + response.body().get(0).getLocation()));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    Uri.parse("http://maps.google.com/maps?saddr=" + latitude + ", " + longitude + "&daddr=" + response.body().get(0).getLocation()));
                             if (ActivityCompat.checkSelfPermission(BuyActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                 // TODO: Consider calling
                                 //    ActivityCompat#requestPermissions
